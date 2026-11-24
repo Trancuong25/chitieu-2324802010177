@@ -1,0 +1,16 @@
+[Unit]
+Description=Quan ly chi tieu ca nhan (Gunicorn)
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+User=cuongadmin
+Group=cuongadmin
+WorkingDirectory=/opt/chitieu
+EnvironmentFile=/opt/chitieu/.env
+ExecStart=/opt/chitieu/.venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8000 app:app
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

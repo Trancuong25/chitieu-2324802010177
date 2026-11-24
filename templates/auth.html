@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{ title }}</h1>
+<form method="post" class="card">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label>Tên đăng nhập<input name="username" required minlength="3" maxlength="50"></label>
+<label>Mật khẩu<input name="password" type="password" required minlength="8"></label>
+<button>{{ title }}</button>
+</form>{% endblock %}

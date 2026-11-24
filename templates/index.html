@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block body %}
+<h1>Chi tiêu của tôi <a class="btn" href="{{ url_for('create') }}">+ Thêm khoản chi</a></h1>
+<div class="card"><strong>Tổng chi tháng này: {{ '{:,}'.format(month_total) }} đ</strong>
+{% for c in by_cat %}<div>{{ c.category }}: {{ '{:,}'.format(c.t) }} đ</div>{% endfor %}</div>
+{% if rows %}<table><tr><th>Ngày</th><th>Danh mục</th><th>Ghi chú</th><th>Số tiền</th><th></th></tr>
+{% for r in rows %}<tr><td>{{ r.spent_on }}</td><td>{{ r.category }}</td><td>{{ r.note }}</td>
+<td>{{ '{:,}'.format(r.amount) }} đ</td>
+<td><a href="{{ url_for('edit', eid=r.id) }}">Sửa</a>
+<form method="post" action="{{ url_for('delete', eid=r.id) }}" onsubmit="return confirm('Xóa khoản chi này?')">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button>Xóa</button></form></td></tr>{% endfor %}</table>
+{% else %}<div class="card">Chưa có khoản chi nào.</div>{% endif %}
+{% endblock %}

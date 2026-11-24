@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{ title }}</h1>
+<form method="post" class="card">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label>Số tiền (VNĐ)<input name="amount" type="number" min="1" required value="{{ item.amount or '' }}"></label>
+<label>Danh mục<select name="category">{% for c in categories %}<option {{ 'selected' if item.category == c }}>{{ c }}</option>{% endfor %}</select></label>
+<label>Ghi chú<input name="note" maxlength="200" value="{{ item.note or '' }}"></label>
+<label>Ngày chi<input name="spent_on" type="date" required value="{{ item.spent_on }}"></label>
+<button>Lưu</button> <a href="{{ url_for('index') }}">Hủy</a>
+</form>{% endblock %}
